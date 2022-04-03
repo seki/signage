@@ -77,14 +77,26 @@ module Signage
     end
   end
 
+  class TextTrack
+    def initialize
+      @text = ["こんにちは、世界。Hello, World.", "もう一度 Hello, Again."]
+    end
+    attr_reader :text
+
+    def total_time
+      @text.size * 10
+    end
+  end
+
   class SignageTofu < Tofu::Tofu
     set_erb(__dir__ + '/signage.html')
 
     def initialize(session)
       super(session)
       @image_track = ImageTrack.new
+      @text_track = TextTrack.new
     end
-    attr_reader :image_track
+    attr_reader :image_track, :text_track
 
     def tofu_id
       'signage'
