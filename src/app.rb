@@ -52,9 +52,12 @@ module Signage
 
   class ImageTrack
     def initialize
-      @images = %w(P4150004.jpg P4180002.jpg P4180005.jpg).map {|x|
+      size = 12 # const
+      src = %w(P4150004.jpg P4180002.jpg P4180005.jpg).map {|x|
         "https://www.druby.org/images/#{x}"
       }
+      a, b = 12.divmod(src.size)
+      @images = src * a + src[0, b]
       @fade = 4
       @display = 6
     end
