@@ -190,11 +190,28 @@ body {
       <div class="main_img" style="background-image: url(<%= img %>); animation-delay: <%= n * (im.fade + im.display) %>s;"></div>
       <% end %>
       <div class="marquee huge wf-notoserif">
-        <p style="animation-duration:<%= tx.total_time %>s;"><% tx.text.each do |text| %><span><%=h text %></span><% end %></p>
+        <p id='text-track'></p>
       </div>
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
 
+function set_text(tx_text) {
+  let place_holder = document.querySelector('#text-track');
+  place_holder.style.animationDuration = "" + (tx_text.length * 10) + "s"
+  while (place_holder.firstChild) {
+    place_holder.removeChild(place_holder.firstChild);
+  }
+  tx_text.forEach(element => {
+    let span = document.createElement('span');
+    span.textContent = element;
+    place_holder.appendChild(span);
+  });
+}
+
+set_text(<%= tx.text.to_json %>);
+
+</script>
   </body>
 </html>

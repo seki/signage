@@ -2,6 +2,7 @@
 require 'tofu'
 require 'pathname'
 require 'pp'
+require 'json'
 
 module Tofu
   class Tofu
@@ -82,7 +83,7 @@ module Signage
 
   class TextTrack
     def initialize
-      @text = ["こんにちは、世界。Hello, World.", "もう一度 Hello, Again."]
+      @text = ["こんにちは、世界。Hello, World.", "もう一度 Hello, Again.", "sync sync sync"]
     end
     attr_reader :text
 
